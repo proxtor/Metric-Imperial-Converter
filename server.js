@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const expect = require("chai").expect;
 const cors = require("cors");
 require("dotenv").config();
+let helmet = require('helmet');
 
 const apiRoutes = require("./routes/api.js");
 const fccTestingRoutes = require("./routes/fcctesting.js");
@@ -18,6 +19,7 @@ app.use(cors({ origin: "*" })); //For FCC testing purposes only
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(helmet.noSniff());
 
 //Index page (static HTML)
 app.route("/").get(function (req, res) {
